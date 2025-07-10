@@ -5,7 +5,7 @@ from task_reports import generate_task_report
 
 filename = ""
 output = "output.xlsx"
-func = "task"
+func = "Task Report"
 
 def set_file(x: events.ValueChangeEventArguments):
     global filename
@@ -20,8 +20,8 @@ def set_func(x: events.ValueChangeEventArguments):
     func = x.value 
 
 def report_function(*args):
-    if func == "Task Report": return generate_task_report(args)
-    if func == "Facility Utilization Report": return generate_counts_reports(args)
+    if func == "Task Report": return generate_task_report(*args)
+    if func == "Facility Utilization Report": return generate_counts_reports(*args)
 
 def generate_wrapper():
     global filename, output
@@ -43,12 +43,12 @@ def generate_wrapper():
                 ui.notify('Error generating report.')
 
 ui.page_title('Connect2 Reports Generator')
-ui.label('This tool generates a report on fitness center utilization based on Connect2 Filtered Counts Reports.')
+ui.label("This tool generates reports from Connect2 data: fitness center utilization reports based on C2C Filtered Counts Reports, and task reports based on C2C Filtered Task Reports.")
 ui.label('Use this tool as follows:')
-ui.label('1. Generate and download a Filtered Counts Report from Connect2. This should be a .csv file and only include fitness centers (NOT issue rooms or courts)')
+ui.label('1. Generate and download the relevant report from Connect2. This should be a .csv file and only include fitness centers (NOT issue rooms or courts)')
 ui.label('2. Save the Connect2 file in the same file directory of this tool.')
-ui.label('3. Type the name of the file in the box below. Include the file extension (".csv") in the name. For example, a file could be named "input.csv"')
-ui.label('4. (Optional) Type the name of the resulting report in the box below. Include the file extension (".xlsx") in the name. The default name is "output.xlsx"')
+ui.label('3. Type the name of the input report file in the box below. Include the file extension (".csv") in the name. For example, a file could be named "input.csv"')
+ui.label('4. (Optional) Type the name of the final report file in the box below. Include the file extension (".xlsx") in the name. The default name is "output.xlsx"')
 
 with ui.row():
     with ui.column():

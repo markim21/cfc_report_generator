@@ -88,10 +88,14 @@ def generate_task_report(filename, output):
     df_r = append_responses(i_df, groupby)
     tn_df = df_cr.join(df_r)
 
-    with pd.ExcelWriter("output.xlsx") as writer:
+    with pd.ExcelWriter(output) as writer:
         t_df.to_excel(writer, sheet_name="By Tag")
         tn_df.to_excel(writer, sheet_name="By Task Name")
+
+    print("sheet saved.")
+    return True
     
+# For testing purposes:
 def run_locally():
     week_report = "Export (1).csv"
     generate_task_report(week_report, '')
